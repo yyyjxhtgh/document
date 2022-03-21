@@ -1,0 +1,32 @@
+1.	Use app2 as an example
+
+2.	Copy all dependencies including dev dependencies from admin package.json to app2  (see attachment)
+
+
+3.	Add the following in package.json
+"scripts": {
+    "postinstall": "ngcc"        //I added this in the first line.
+  }
+
+4.	Deleted node_modules for app2
+
+5.	Deleted package-lock file
+
+6.	Change import singleSpaAngular from 'single-spa-angular' in main.single-spa.ts to import {singleSpaAngular} from 'single-spa-angular';            //The build seems giving compiling error without {}  @Pan, Ron
+7.	Copy required admin code “app” folder.   //I removed the existing one.
+
+8.	Copy other admin required folders under src      // By doing so I tried to avoid any typo or mistakes.
+
+9.	Simplify  Style.css under src to remove any imports  // By doing so I tried to avoid any style dependencies from original app2.   It complains if the style.css file is not there though.
+
+10.	Run npm install
+
+11.	Run npm build
+
+12.	Run ng serve --disable-host-check --port 4202 --deploy-url http://localhost:4202/ --live-reload false
+
+13.	You can see http://localhost:4202/main.js which will be loaded by the shell app running on 4200.
+
+14.	When I navigate from shell to admin there are some app exceptions on console:  ERROR Error: No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.  I will assume it is app config related issues.  You can take a look. 
+
+
