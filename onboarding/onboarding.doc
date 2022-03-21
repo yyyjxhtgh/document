@@ -1,0 +1,178 @@
+On-boarding Required Software
+Contents
+Tools
+1)	Eclipse
+2)	Liferay Studio
+3)	Build – Maven, Gradle, Ant
+4)	Cobertura
+5)	Junit and Mockito
+6)	Log
+7)	Findbugs
+8)	PuTTY, WCP/Filezilla
+9)	SOAPUI
+10)	Insomnia
+11)	DB2 and MS-SQL Server
+12)	Jenkins
+13)	Repository – Nexus
+14)	XL Deploy/XL Release
+15)	AppDynamics
+16)	Splunk
+17)	Important IQ Specific Information
+
+Application Servers
+
+Webservers
+
+Client Technologies
+
+Backend Technologies
+
+Third Party Tools
+
+
+
+
+
+
+
+
+
+
+Tools
+1)	Eclipse
+-	This is the main development environment for iQ. Use the following file location to copy the eclipse neon zip file to your machine with most preconfigured development settings.
+T:\data processing\b2b\BLISS\Software\Eclipse-DEV
+Eclipse Plugins:
+•	SVN – Included in above installation. Please refer to SVN Document for more details.
+•	Liferay – Included in above installation. 
+•	Git – Future implementation needed. May need a newer version of Eclipse.
+•	Jrebel – Not included in the above installation. Not required, but consider installing the plugin from T:\data processing\b2b\BLISS\Software\Jrebel-plugin
+•	PMD – This is a part of Jenkins. It is a procedure that looks through the code for common mistakes and redundancy in Jenkins builds.
+•	Findbugs – This is a part of Jenkins. It looks for potential bugs in the code found in Jenkins builds.
+•	SecureAssist – Follow the PDF in the following link for the installation. Follow the Usage guide located in the Usage Training folder to learn how to use SecureAssist.
+http://connected.infovantiv.com/corporatesecurity/SSCP/Documents/Forms/AllItems.aspx?RootFolder=%2Fcorporatesecurity%2FSSCP%2FDocuments%2FSecureAssist&InitialTabId=Ribbon%2EDocument&VisibilityContext=WSSTabPersistence
+2)	Liferay Studio
+This is a plugin that can be installed to eclipse through the following directory:
+T:\data processing\b2b\BLISS\Liferay Tools\Liferay\7.0\LDS
+3)	Build – Maven, Gradle, Ant
+Maven build instructions for Eclipse:
+1.	Select Run Configurations under the Run As.. button
+ 
+2.	Right click Maven Build from the list and click new
+ 
+3.	Name the build after the project you are building, and point the workspace to it’s location
+ 
+4.	Set the goals to: install package -U -X dependency:tree
+5.	Save the settings.xml file located in T:\data processing\b2b\BLISS\Software\Maven Build to your C:\Users\UID\.m2\ directory, where UID is your current UID or NID.
+ 
+6.	There is a default maven runtime used in the build, however you can provide your own maven to run the build by clicking on Configure.. and selecting it.
+7.	Navigate to the JRE tab and select Alternate JRE to use Java 1.8. You must have the java_1.8_64 JRE installed to use it.
+8.	Paste the following under VM arguments:
+-Djdk.tls.client.protocols=TLSv1.2 -Dhttps.protocols=TLSv1.2
+9.	Click Run to finish creating this maven build.
+
+4)	Cobertura
+This is a java tool that keeps track of what parts of java code are being tested. It identifies which parts are lacking test coverage and gives a percentage accordingly. This is used on Jenkins.
+5)	Junit and Mockito
+Unit testing frameworks
+6)	Log
+
+7)	Findbugs
+This is part of Jenkins that finds all bugs in the code. Surpassing the set threshold in the Jenkins job will result in a build failure until the sufficient amount of bugs are fixed.
+8)	PuTTY, WCP/Filezilla
+Putty:
+PuTTY/mtputty can be used in the T:\data processing\b2b\BLISS\Software directory by copying the PUTTY.EXE or mtputty.exe to your local machine. To connect to databases, use the host name of saflokydlpbra01 or one of the other hosts. Then once connected and logged in with your UID (lowercase U) when you have access to the server, use one of the following commands in the prompt to load into a server directory:
+iQ WAS links
+pbrun -h sltfloapnextg70 su - wtwas85a -- LOAD
+pbrun -h sltfloapnextg71 su - wtwas85a -- LOAD
+pbrun -h sltfloapnextg60 su - wtwas85a -- SYST
+pbrun -h sltfloapnextg75 su - wtwas85a -- STAGE
+pbrun -h sltfloapnextg80 su - wtwas85a – DEV
+
+The following command can be used to tail the system logs for syst:
+tail -f /opt/wt/logs/WAS/8.5/a/DirectNGP/Liferay_Portal_1/SystemOut.log
+WinSCP/Filezilla:
+To transfer files from your machine to one of the servers, you must use WinSCP or Filezilla. WinSCP can be found in T:\data processing\b2b\BLISS\Software\WinSCP\WinSCP . You can connect to the saflokydlpbra01 server similarly to how you do in PuTTY. Use your UID (lowercase U). Then, paste the file you want transferred in the right side of the program.
+ 
+Then, while connected to a server in PuTTY, navigate to the directory where you would like to transfer the file from your local machine. Then, enter the scp command below to transfer the file. You must enter your password you made when you were granted access to saflokydlpbra01.
+Example commands:
+cd /opt/wt/WAS/apps/8.5/a/DirectNGP 
+scp UID@saflokydlpbra01:/home/UID/* .
+
+Where UID is your current UID/NID, and the directory following cd is the directory you want to upload the file currently in WinSCP to.
+9)	SOAPUI
+The installation exe can be found in T:\data processing\b2b\BLISS\Software as SoapUI-x64-4.6.4.exe to run it. This is primarily used for observing the contents of SOAP requests returned from the API.
+10)	Insomnia REST client
+Must be installed from the internet.
+11)	DB2 and MS-SQL Server
+For DB2, you must have AQT and have access to the DB2 server. To connect to the database, open AQT and select a DB2 server that you have access to. Enter your credentials created when you were given access.
+
+12)	Jenkins
+Location: http://puflopjenkap01:8080/
+Jenkins contains all jobs that keep track of building, deploying, and automating portlets as well as finding bugs. It allows for the developer to deploy their code to the iQ webpages. There is documentation that goes into detail about the different jobs and their configurations.
+
+13)	Repository – Nexus
+
+14)	XL Deploy/XL Release
+XL Deploy/XL Release is located at http://slflokydlxlrl01:5516/#/default where access must be granted to use it. There is a training guide located in T:\data processing\b2b\BLISS with the name DeployXL_Training.pdf
+15)	AppDynamics
+16)	Splunk
+17)	Important IQ Specific Information
+Links
+ 
+1.	ALM: http://s1flokydlqctr01:8080/qcbin/start_a.jsp  
+Project: Bliss 
+Domain: Legacy
+2.	Rally: https://rally1.rallydev.com/slm/login.op 
+3.	Jenkins: puflopjenkap01:8080
+4.	Citrix: http://citrixwi-1.infoftps.com/Citrix/XenApp/Internal/auth/login.aspx
+5.	Direct Ticket: http://stgramidlftdb01.ad001.infoftps.com/EBus_Support/tickets.php 
+ 
+Environments
+Systest – syst.iq.infovantiv.com
+Load – load.accessmyiq.infovantiv.com/group/guest
+Dev – dev.iq.infovantiv.com
+Prod – accessmyiq.com
+
+
+Application Servers
+1)	Tomcat 8.5
+
+Webservers
+1)	Apache Webserver 2.4
+
+Client Technologies
+1) Jquery
+2) Bootstrap
+3) HTML5
+4) CSS
+5) DHTMLX Grid (***will be upgraded to the latest version, and may be replaced with different and better framework)
+6) AMCharts
+
+Backend Technologies
+OpenRules 6.0 - OpenSource Rules engine framework (runs on Tomcat)
+SpringBatch for Batchjobs- Runs on Tomcat and the Websphere app servers 
+Liferay 6.2 (Current), Liferay 7.0 (Planned in Dec 2018/Jan 2019)
+Hibernate
+Spring MVC
+Spring Data
+Spring Restful
+JAXWS, JAXB
+JPA
+Common-logging
+Spring Security for SAML 2.0
+JSTL, Spring UI (Taglibraries)
+ESAPI (to implement code security)
+Apache Commons Utility
+FTP (File Transfer Protocol)
+Ehcache (For Caching data at the Server Side)
+
+Java 8 (Planned with Liferay 7.0 on Dec 2018/Jan 2019)
+
+Third Party Tools
+1) MSTech company's tool - Eviewer (Used to accomplish Scan and upload files to render as a pdf viewer format)
+2) DHTML grid - To render grids in the webapplication
+3) AMCharts - To convert JSON object to graph format
+4) Aspose - has image processing work related APIs
+5) PDFBox - To create PDFs (OpenSource)
+6) ICEPDF - To create PDFs (OpenSource), had to use this to accomplish the dispute processing for poor quality images  (***will be replaced with Aspose)
