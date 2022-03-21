@@ -1,0 +1,22 @@
+API guideline:
+
+Introduce CRUD services to communicating with persistence layer.
+All APIs will be divided into at least two layers:  domain services and crud services.
+Domain services will handle business logic and communicated with client.  In some cases you might need to create presentation API which purely process domain service’s response data and send back to clients.  In this case, usually one domain services would be used by different screens (presentation APIs).
+Crud services will communicate with persistence layer.  No business logic. It uses for Create/Read/Update/Delete for resources.
+Please see if we can create common crud service for all soap communication.  That will make domain services quite simple and clean.
+All services will be registered into eureka.
+Service communication needs to be done via eureka client discovery.   In case of eureka not available a property can be configured to support crud service url.
+
+All apps will use spring boot 2.3.0 or above.  We need to have smb parent pom to be created which defines the spring boot version (2.3.0 should be fine).
+Port number starts with 20000.
+All common functions need to be built in common lib jar.
+Use noun plus http method to determine API action.
+Use POST to fetch data if there is an input.
+All APIs need a docker file for potential cloud deployment.
+
+
+
+
+
+
