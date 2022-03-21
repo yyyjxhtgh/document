@@ -1,0 +1,16 @@
+LIFERAY configuration:
+1.	 Install liferay instance  (Infinity IDP, certain jars should be included):  Dhiraj has the steps for configuration.
+2.	Database Configuration:   liferay datasource configures its database.   It should point to right mssql database.
+3.	App4 instance currently configs to IDP test database server.
+4.	We need to create a new database ( can be on same server) for coexistence test.  The new database needs some config data change for IDP interaction.
+5.	Login into liferay with its admin user.  So we can config identity provider info   (key store,  its SP matadata file from IDP).
+6.	Notice same liferay instance can support different firm by using different login urls.   Each url can be configured on web server with different port number so it can be set for different firm domains.  App port is 11181 currently.
+7.	Once user logined he can SSO to any apps which are configured in IDP for that firm.
+
+IDP configuration:
+
+1.	Login in the firm login url for a specific firm.   You need admin account for SP set up.
+2.	Create a SP with unique client id.
+3.	Signing key is required.   Same key will be loaded for SP side.  (liferay or API )
+4.	Fixed property is for all.
+5.	You can download SP matadata.
