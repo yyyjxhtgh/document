@@ -1,0 +1,30 @@
+1.	Run npm -v and node -v to make sure installation ok.
+
+2.	Run the following commend:
+npm config set proxy=http://u460806:Summer13@unetproxy.infoftps.com:8080
+npm config set http-proxy=http://u460806:Summer13@unetproxy.infoftps.com:8080
+npm config set https-proxy=http://u460806:Summer13@unetproxy.infoftps.com:8080
+npm config set strict-ssl = false
+
+
+npm config set registry http://registry.npmjs.org
+
+3.	We have to determine what the registry is.
+
+For regular angular app:
+
+npm config set registry https://registry.npmjs.org
+
+For ruf (fis internal):
+
+>npm config set registry https://artifactory.fis.dev/artifactory/api/npm/ruf-npm-virtual/
+
+>npm login
+Username: e5615538
+Password:   eid password
+Email: (this IS public) jack.hu@fisglobal.com
+Logged in as e5615538 on https://artifactory.fis.dev/artifactory/api/npm/ruf-npm-virtual/.
+
+Finally do the ruf install
+
+>npm install @ruf/idp-auth -save
