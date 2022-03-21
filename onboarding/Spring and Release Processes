@@ -1,0 +1,116 @@
+Sprint and Release Processes
+Contents
+Sprint Processes
+	Timelines and Meetings
+	Meeting Information
+	References
+	User Story Procedures
+	Point Estimation
+Release Processes
+	Moving Code
+	Release Procedures
+	QA Testing
+	Defect Handling
+	Production Support
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sprint Processes
+Timelines and Meetings
+Each Sprint consists of a 2 week period starting on a Thursday and ending on a Wednesday. There are several meetings throughout this 2 week period that require developer attendance.
+•	Daily Standups
+•	Backlog Grooming
+•	Sprint Planning
+•	Sprint Demo
+Each sprint contains 10 days of work, where these 10 days are the weekdays of the 2 week period.
+For most days, there is only 1 Sprint-related meeting a day. The meetings can range from 30 minutes to 2 hours, depending on the type of meeting.
+
+Meeting Information
+Daily Standups
+All of those who have a stake in the product attend these meetings. They are short meetings meant for developers to give updates on their User Stories. There are several types of updates the developer is expected to give:
+•	What did the developer accomplish yesterday?
+•	What will be done today?
+•	What obstacles are impeding User Story progress?
+These meetings allow for developers to share problems and improvements, share understanding of goals, and make decisions on how to proceed forward with development.
+Backlog Grooming
+The product owners and most of the rest of the team review items in the backlog on Rally. This involves prioritizing User Stories that are relevant and ready to be worked on by developers. Activities in this meeting involve:
+•	Creating User Stories based on new needs
+•	Prioritizing User Stories for the upcoming Sprint
+•	Assigning point estimates to User Stories that do not have them
+•	Correcting point estimates to accurately reflect development time
+•	Removing User Stories that may no longer be relevant or pushing them forward for later development.
+Sprint Planning
+The product owners and the team negotiate what stories will be taken on for the sprint. The product owner will describe the highest priority features to the team, and the team asks enough questions to make a narrow estimation of point length and tasks required. There will be clarification of acceptance criteria and complexity of the stories.
+Sprint Demo
+This meeting occurs on the last day of a sprint. It allows for the developers to demonstrate what functionality they have added in the previous sprint, as well as show off the code changes. Product owners give their input and constructive criticisms for last minute fixes.
+References
+There are several team members to talk to when it comes to information regarding areas of iQ and getting information for story completion.
+•	Kumar Natarajan – Sprint information and requirements
+•	Sandra Curlis – Merchant side of iQ, DB2 database information, can provide test data
+•	Jill Shaner – FI side of iQ, can provide test data
+•	Jon Klein
+•	Tristan Armbrister – Production support
+
+User Story Procedures
+Each User Story has several aspects in Rally to narrow down what must be done in development.
+•	There is a plan estimated amount of points showing approximately how long development should take.
+•	There is a title and description set to describe what the feature is and other important details.
+•	There is a schedule showing what release and sprint it is located in to show perspective. Some user stories also have a parent story where the story is a part of several others that lead to a bigger complete feature.
+•	There are attachments featuring any application information and files needed for user story completion. These usually include imagery or data that needs to be used.
+•	There is acceptance criteria which dictates what needs are to be met for the user story to be accepted and moved to testing.
+•	As a developer, Customer Field 1 is used to document what projects in the code were changed for the user story.
+- Each User Story has to have tasks added to it that indicate what must be done to lead to completion. This can be done by the developer or by the team in a backlog/sprint planning meeting. Tasks can include things such as tests, analysis, code development, code review, and QA.
+- There are also other areas being tracked such as defects that are found throughout development and dependencies that a user story might rely on.
+Each Developer must fill out the User Story – Dependency Checklist excel sheet and attach it for each story.
+
+Point Estimation
+Every user story has an allotted amount of points assigned to it. It is up to the developer and the team to correctly estimate these point values. Each point is worth on average about 8 hours of development work. Most stories (except for those designated as DEV/QA only) must use one of the assigned points for QA testing. For example, a 4 point user story will include 3 points of development and 1 point of QA.
+
+
+
+
+
+Release Processes
+Moving Code
+Once a user story is queued for release, the developer has to take several steps to ensure that it gets moved to production.
+•	One easy way to keep track of changes made to a user story is by looking at the history of past commits for that user story number. By right clicking on a project and going to Team->Show History, you can search by UID/NID or user story number to find all commits for that story, if you included the story number in each commit message.
+•	Merge the iq-dev branch with the iq-release-lr62 branch. Refer to the Branching and Repository documentation if assistance is needed.
+•	When merging the branch, select only the commits that were done for the user story going for release. This can easily be done if all commits include the user story number, as the developer can find them and select them from the list based on that.
+•	Confirm with another developer what changes you have made and allow them to review it.
+•	Commit all changes to the release branch to finalize your changes.
+
+Release Procedures
+During a release, there is a sequence of events that occur that a developer must be aware of.
+•	The scope of the release is sent out about 3 weeks before the release. This is an email containing all portlets involved in the release, as well as user story acceptance dates. They will also contain dates for each user story where the code must be moved to load/release branch.
+•	A scope and dependency sheet must be filled out and confirmed with testers to ensure that all necessary code changes have been updated and all dependencies are taken care of.
+•	There will be an artifacts review about 3 days before release where testers confirm what external artifacts were changed in addition to the code with the story, such as properties files and WSDL changes.
+•	There will be a pre-release phone call where the developer walks through all code changes for the production support team by sharing their screen. This will allow for the production support team to follow the code changes and fix them if necessary in production.
+
+QA Testing
+Before a release, QA goes through regression testing about 2 weeks before. This involves 5 days of testing over the areas that new code will be added. If any defects are found, they are reported to developers for a fix.
+
+Defect Handling
+Defects are reported in ALM Lifecycle Management by the regression testers. It is a developer’s job to stay up to date on defects relevant to their work and fix them in a timely manner before release. The user story will be marked with the defect in an email and will remain that way until the defect is fixed and properly tested.
+
+Production Support
+•	When the release itself occurs, it will take a few hours of moving code from release to production. There is a team that does this and reports any defects or problems. There are also a team of developers on hand to assist with solving release problems if any were to occur.
+•	Developers involved in this will be notified beforehand. If the release goes well, they may not have to make any changes or last-minute defect fixes.
