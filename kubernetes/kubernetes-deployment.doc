@@ -1,0 +1,100 @@
+1.	 Using maven to create jar file.    This step can be added into dockerfile.
+2.	Docker images   display all images in local
+3.	Build the container image :   docker build -t iq-smb .    
+
+•	-t iq-smb defines the name ("tag") of your container — in this case, your container is just called iq-smb 
+•	. is the location of the Dockerfile and application code — in this case, it's the current directory
+
+
+4.	We need to tag it so it can be pushed to docker hub
+
+docker tag iq-smb <username>/iq-smb:latest
+
+Please replace <username> with your Docker ID.  Latest is the tag
+
+5.	We can run the container by running the following commends:
+
+docker run \
+  --name=iq-smb \
+  --rm \
+  -p 8080:8080 \
+    Iq-smb
+
+If there are other containers to be communicated then we have to create a network and define the network here,  also use environment variable to include that containers.
+
+6.	We need to push docker images to the specific dockerhub.  By default it goes to official dockerhub.
+
+For enterprise docker hub we need to change the configuration (add info here)
+
+docker login
+
+docker push yyyjxhtdocker/iq-smb:latest 
+
+To assure it is pullable:  docker pull yyyjxhtdocker/iq-smb:latest
+
+We can run the same commend in step 5 by using the new docker image
+
+7.	Kubernetes – the container orchestrator
+•	Now we need to deploy the container to Kubernetes.  Or Using a managed Kubernetes service like Google Kubernetes Service (GKE), Azure Kubernetes Service (AKS), or Amazon Elastic Kubernetes Service (EKS)
+Install minikube,  kubectl tools
+
+minikube start
+
+kubectl cluster-info
+
+Create a kube folder under project.  We will keep all Kubernetes yaml files under this folder.
+
+Here is the example for deployment and service.
+
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iq-smb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iq-smb
+  template:
+    metadata:
+      labels:
+        app: iq-smb
+    spec:
+      containers:
+        - name: iq-smb
+          image: yyyjxhtdocker/iq-smb:latest
+          ports:
+            - containerPort: 20000
+          imagePullPolicy: Always
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: iq-smb
+spec:
+  selector:
+    app: iq-smb
+  ports:
+    - port: 20000
+      targetPort: 20000
+  type: LoadBalancer
+
+
+
+
+
+
+8.	Deployment    kubectl apply -f .
+
+9.	Get pods info:  kubectl get pods
+
+10.	Now you need to be able to connect to the application, which you have exposed as a Service in Kubernetes. One way to do that, which works great at development time, is to create an SSH tunnel
+
+kubectl port-forward svc/iq-smb 20000:20000
+
+
+11.	 Restart a pod:     kubectl rollout restart deployment [deployment_name]
+
+12.	
