@@ -1,0 +1,17 @@
+App:
+      App.mudule.js:      declare app component.  Boostrap the app.
+      App.component.ts:   initialize the app
+      App.component.html:   <app-root>   template for page:   prelogin and postlogin which include headers and navigation.
+     App.routing.mudule.ts
+      <bundle name>:
+                    Module:    <bundle name>.module.ts   for lazy load
+                   Components:
+                              <feature names>:
+                                                Ts, css, html
+   Services:
+            For api calls
+  Util:
+            Common functions.
+ Interceptors:
+           Common interceptors;
+
