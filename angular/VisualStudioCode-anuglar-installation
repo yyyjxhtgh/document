@@ -1,0 +1,53 @@
+Steps to install Visual studio Code and Angular on FIS laptop:
+
+1.	Install Visual studio https://code.visualstudio.com/download
+
+2.	Install nodejs https://nodejs.org/en/download/
+(Note:   Installation of nodejs might need admin.  However you can use download zip format and install manually without admin right.
+You need set directory of npm folder into PATH via control panel -> user account -> edit env. Variable
+
+3.	Run npm -v and node -v to make sure installation ok.
+
+4.	Run the following commend:
+npm config set proxy=http:// u460806:Summer10@unetproxy.infoftps.com:8080
+npm config set http-proxy=http:// u460806:Summer10@unetproxy.infoftps.com:8080
+npm config set https-proxy=http:// u460806:Summer10@unetproxy.infoftps.com:8080
+npm config set strict-ssl = false
+npm config set registry https://registry.npmjs.org
+
+-	  Working above --------
+npm config set proxy=http://u460806:Summer13@usproxy.dlb.corp.vantiv.com:8080
+
+npm config set http-proxy=http:// u460806:Summer13@usproxy.dlb.corp.vantiv.com:8080
+
+npm config set https-proxy=http:// u460806:Summer13@usproxy.dlb.corp.vantiv.com:8080
+
+npm config set strict-ssl = false
+
+
+npm config set proxy= http:// u460806:Summer07@inetproxy.infoftps.com:8080
+npm config set http-proxy=http:// u460806:Summer07@inetproxy.infoftps.com:8080
+
+npm config set https-proxy=http:// u460806:Summer07@inetproxy.infoftps.com:8080
+npm config set strict-ssl = false
+npm config set registry https://registry.npmjs.org
+
+
+
+
+
+Note:  the proxy id is acquired from proxy script .pac file.	
+
+5.	Run npm install -g @angular/cli 
+
+6.	Run ng version to check if installation is successful.
+
+7.	Open visual studio code.  You might need to add the following to user settings.json for window:
+
+ "terminal.integrated.shellArgs.windows": ["-ExecutionPolicy", "Bypass"]
+
+8.	For ruf installation please refer ruf install doc
+9.	If virtual code gives error:  annot be loaded because running scripts is disabled on this system  please run:    Set-ExecutionPolicy -Scope "CurrentUser" -ExecutionPolicy "RemoteSigned"
+10.	  Start project ng serve under the project folder
+
+
