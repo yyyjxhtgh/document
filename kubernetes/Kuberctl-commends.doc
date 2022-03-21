@@ -1,0 +1,16 @@
+Kubectl commends:
+
+1.	Check nodes info:  Kubectl get nodes
+2.	Check operating info:  Kubectl describe nodes
+3.	Create a pod with a specific image:    kubectl run mypod --restart=Never --image=nginx
+4.	Get pods info:    kubectl get pods
+5.	Get a specific pod details:   kubectl describe pods mypod
+6.	Get a list of containers in a pod:   kubectl get pods POD_NAME_HERE  -o jsonpath='{.spec.containers[*].name}'               
+7.	Get container info:  kubenetes logs POD_NAME CONTAINER_NAME
+8.	Delete a pod:  kubectl delete pod POD_NAME
+9.	Get replicaSet info:  kubectl get rs
+10.	Get replicaSet details:  kubectl describe rs
+11.	Explain replicaset attributes(VERSION):  kubectl explain replicaset | grep VERSION
+12.	Create a repicaset from a yaml:  kubectl create -f xxxx.yaml
+13.	Delete replicaset:  kubectl delete replicaset replicasetname  // kubectl pod xxx will not delete the replicaset since it assures the desired number
+14.	
