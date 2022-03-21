@@ -1,0 +1,52 @@
+For config server which talks to github for its application yaml files, we need to setup ssh keys so config sever can communicate with github
+The pub key needs to be set in github for the repo it tries to reach.
+
+Config ssh for config server:
+
+1.	Check if existing SSH keys are present
+
+$ ls -al ~/.ssh
+# Lists the files in your .ssh directory, if they exist
+
+We can use existing public and private key pair. However, a new key is recommended.
+
+2.	Generating public/private rsa key pair:  
+
+ $ ssh-keygen      
+
+Choose default setting and no passphrase.
+$ ls ~/.ssh
+id_rsa id_rsa.pub
+The command displays two files, one for the public key (for example id_rsa.pub) and one for the private key (for example, id_rsa).
+
+3.	Add the key to the ssh-agent
+If you don't want to type your password each time you use the key, you'll need to add it to the ssh-agent.
+
+To start the agent, run the following for windown:
+
+$ eval `ssh-agent`
+
+:
+Agent pid 9700
+
+In load env vi  it is eval $(ssh-agent)
+
+
+$ ssh-add  ~/.ssh/<private_<private_key_file>     //id_rsa
+
+4.	Open public key and copy the value  (it should be begin with rsa..)  to github.
+vi ~/.ssh/id_rsa.pub
+https://github.worldpay.com/Worldpay/iq-service-configurations
+	Settings   Deploy keys  Add ne deploy keys  paste
+
+5.	Verify the connection
+$ ssh -T git@github.worldpay.com
+
+
+Additional info:
+
+Find the key where is used:
+
+ssh -T -ai ~/.ssh/id_rsa git@github.worldpay.com
+
+
