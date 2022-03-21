@@ -1,0 +1,65 @@
+Using Spring Boot Config Server to externalize configuration 
+
+Spring boot provides server and client-side support for externalized configuration in a distributed system. With the Config Server we have a central place to manage external properties for applications across all environments.
+Basically, a config server allows you to externally store variables your application will need to run in all environments, regardless of lifecycle, and update them in just one place.
+This document is based on Config server integrated with Git.   We can also use SVN as central place for externalized configuration.
+
+1.  Set up spring config server service
+a.	Config Server will be running a service.   The code will be maintained in github.
+
+b.	The service will have the following configuration in application.yml file
+server:  
+  	port:
+    		8888
+spring:  
+  	application:    
+    		name: iq-config-server 
+  cloud:    
+    	config:      
+      		server:        
+         			git:          
+            				uri: ${git.secure.config.repo.url}
+                                                           # github url for properties
+                                                        
+Note:  we should enable ssh for the running server to communicate with git by setting ssh key properly.  Just be aware spring boot config server only supports ssh-ras private key format out of box.  Other formats (such as ecdsa-sha2-nistp256) are not supported. You need to use the following commend to change the format if needed:
+
+ssh-keygen -p -m PEM -f c:/users/jack.hu/.ssh/id_rsa
+
+c.	Setting Up Your Config Server Properties in github
+
+Create a new blank project.
+It will only have properties.
+All microservices property files will be stored here with the following name convention:
+[application name]-[life cycle profile].yml
+ex. Iqnow_card_token_service-QA.yml
+Commit to github repo.
+The repo url will be used in config server’s application.yml.
+Run config server.  Now it is associated with all services yml files.
+
+(We should have protected uri for production config server)
+
+In dev and test env we can use spring.profiles.active property to define the profile name in application.yml which can help the right yml files in config server.  But do not define it in profile specific yml file.
+Active profile can also be triggered by commend line.
+
+2.	   Spring boot client application 
+
+Each spring boot application will have unique name which will be defined in boostrap.yml.
+
+spring:
+  		application:
+    			name: ##APPLICATION NAME GOES HERE##
+spring:
+ 	 cloud:
+   		 config:
+     			 uri: https://config-server.non-prod.com
+
+
+
+refresh   curl localhost:8080/actuator/refresh -d {} -H "Content-Type: application/json"
+
+
+
+
+
+
+
