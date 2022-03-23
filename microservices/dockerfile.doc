@@ -1,0 +1,44 @@
+Dockerfile:
+
+Basic standard:
+FROM openjdk:11.0.2-jre-slim
+COPY target/customer.jar .
+CMD /usr/bin/java -Xmx400m -Xms400m -jar customer.jar
+EXPOSE 8080
+
+•	The first line defines the base image with FROM. It is downloaded from the public Docker hub. The image contains a Linux distribution and a Java Virtual Machine (JVM).
+•	The second line adds a JAR file to the image with COPY. A JAR file (Java ARchive) contains all components of a Java application. It has to be available in a sub directory target below the directory in which the Dockerfile is stored. The JAR file is copied into the root directory of the container.
+•	The CMD entry determines which process should be started when the container is started. In this example, a Java process runs the JAR file.
+•	Finally, EXPOSE makes a port available to the outside. This is the port under which the application is available. EXPOSE only means that the container provides the port. It is then available on the internal Docker network. Access from outside is only possible when this is enabled at the start of the container.
+The Docker image can be built with the command docker build --tag=microservice-customer microservice-customer.
+docker is the command line tool with which most functionalities of Docker can be controlled. The created Docker image has the tag microservices-customer as defined by the --tag parameter.
+The Dockerfile has to be in the sub directory microservice-customer. The name of this directory is the second parameter.
+
+
+
+User firm example:
+
+FROM openjdk:10-jre-slim
+
+ENV ENV_USER_NAME user_firm
+
+ENV ENV_APP_HOME /userfirm/user-firm-mapping-service
+
+#Exposed as build time argument, which is then set to environment variable
+
+ARG ARG_APP_PORT=8080
+ENV ENV_APP_PORT $ARG_APP_PORT
+ARG ARG_SERVER_MEMORY=1536
+ENV ENV_SERVER_MEMORY=$ARG_SERVER_MEMORY
+RUN apt-get update
+RUN useradd -ms /bin/bash -U $ENV_USER_NAME \
+&& mkdir -p $ENV_APP_HOME \
+&& chown -R $ENV_USER_NAME:$ENV_USER_NAME $ENV_APP_HOME
+
+USER $ENV_USER_NAME
+WORKDIR $ENV_APP_HOME
+
+COPY --chown=user_firm:user_firm ./target/user-firm-mapping-service-1.0.0-RELEASE.jar $ENV_APP_HOME
+
+EXPOSE $ENV_APP_PORT
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -classpath ./* -Xmx"$ENV_SERVER_MEMORY"M org.springframework.boot.loader.JarLauncher --server.port=$ENV_APP_PORT
