@@ -1,0 +1,69 @@
+Process:
+
+[4/30 10:16 AM] Konepak, Bharath
+Steps:
+1.	Go to the location where the jasypt jar is present in the server and give the below cmd:
+
+/opt/wt/TAS/jdk-11.0.4/bin/java -cp jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="theValueYouWantToEncrypt" password="IQModernization2021V1"
+
+
+
+
+b.      This will create encrypted pwd
+2.       Secret used for IQ Direct is : IQDirectDB2FunctionalIDPassword
+3.       Get the encypted password and update the properties file as ENC(encryptedvalue)
+4.       Run the app using the command
+/opt/wt/TAS/jdk-11.0.4/bin/java -jar -Djasypt.encryptor.password=IQModernization2021V1 -Dspring.profiles.active=local merchantInternal-rs-0.0.1.jar --server.port=11183 >/opt/wt/TAS/IQDirect/logs/MerchantInternal/application.log &
+
+[4/30 11:11 AM] Hu, Jack
+ok, thx
+
+
+Data:
+1.	Application.xml
+
+Secret:  IQModernization2021V1
+Input:   FtpsSec    //sever.ssl. key-store-password:  
+Output:   ENC(dRedHFFFsm1PJtZe4XXgAw==)
+Input:   FtpsSec    //sever.ssl.trust-store-password:  
+Output:   ENC(dRedHFFFsm1PJtZe4XXgAw==)
+Input:  default   //sever.ssl.key-alias: 
+Output: ENC(EqYm2RGvMTesaPBqAVmHAA==)
+Input:  admin   // 
+eureka:
+    login:
+        userName
+Output= ENC(Pgc9XJC34SarJSn4FJWT0g==)
+Input: iqpassword
+eureka:
+    login:
+        password: ENC(9+DWty+y8CG1TZHbFxrXWrGwUHu6dRYh)
+Output= ENC(9+DWty+y8CG1TZHbFxrXWrGwUHu6dRYh)
+Input: changeit
+Output= 1biTL9S0NL0uqH1VE9RaLLBKPtaBsycR
+
+#For IDP JWT token
+jwt:
+  iJWTHeaderString : Authorization
+  iJWTTokenPrefix : Bearer
+  us_merchant:
+    iqmIDPKeyname: iqloadsaml
+    iqmIDPpass: ENC(1biTL9S0NL0uqH1VE9RaLLBKPtaBsycR)
+    idpPrivateKeystore: IQM_LOAD.jks
+
+Input: HNB8UK9R
+Output:  c2aU+Kbri4Zle0nWyW/r6gZ8imT74lBe
+app:
+    datasource:
+        db2:
+            password:  ENC(c2aU+Kbri4Zle0nWyW/r6gZ8imT74lBe)
+
+2.	 Iq-config-server
+
+Input: configadmin
+spring:
+  security:
+    user:
+      name: configadmin
+      password: configadmin
+value:  ENC(fiVqDZtwyBqxcELA17nOUQ3+mC11XI/c)
