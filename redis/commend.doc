@@ -1,0 +1,37 @@
+Implementation for cached data.
+
+Due to some requirement to share session data cross platform and microsevices we are utilizing redis cache server to serve the purpose.   Just be aware that since the session is not used for login authentication  the availability of redis only impacts on those which consumes it.   Please also keep in mind data stored in redis should not contain credentials or other sensitive info.   Otherwise encryption might be needed upon approval.
+
+1.	Set Redis in config. 
+Spring:
+Redis:
+Host:10.37.166.170
+Port:6379
+
+2.	Autowire  redis repo in service or component.   You might need to get the latest sharedlib 009 build.
+@Autowired
+private IQUserRepositoryImpl urepo;
+
+3.	Save or update an object
+
+urepo.save(sid, key, data);
+
+Here: 
+     String sid= SessionUtil.getSession().getId(); 
+     key:   the unique identifier for your data which want to store.  To avoid conflict please follow the name convention:   module_your function.
+     data:   Object you want to store.        
+              
+4.	Find the object by id
+(your data type) urepo.findById(sid, key);
+
+5.	Delete an object
+
+urepo.delete(sid, key);
+
+6.	Other interfaces:
+    void save(String sid, String key, Object data);
+    Object findById(String sid, String key);
+    void update(String sid, String key, Object data);
+    void delete(String sid, String key);
+    boolean hasKey(String sid, String key);
+    void deleteAll(String sid);
