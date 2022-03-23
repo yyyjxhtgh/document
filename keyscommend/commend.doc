@@ -1,0 +1,1 @@
+keytool -genkey -alias iqmapp -keyalg RSA -keysize 2048 -validity 3650 -dname "CN=localhost,OU=IQ,O=IQ Portal,C=US,L=Cincinnati,ST=OH" -ext "SAN:c=DNS:localhost,DNS:nufl2dacsiqa001.nonprod.nb01.local,IP:127.0.0.1" -keypass password -storepass password -keystore iqmkeystore.jks
