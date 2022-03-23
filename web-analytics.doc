@@ -1,0 +1,119 @@
+Google web analytics integration:
+
+1.	Copy the following code to index.html in navbar.
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-191923875-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+<!--  gtag('config', 'UA-191923875-1');     // this line needs to be removed to different loation -- >
+
+</script>
+
+2.	Modify router event  (url based)
+
+Angular has several event handling methods which can be used to access certain information. For Google Analytics, what we’re interested in is the URL a user has navigated to.
+To extract this information, we can use navigationEnd method to access a property called urlAfterRedirects. This property contains the / portion of your routing URL.
+So, for a URL that looks something like this http://localhost:4200/useradmin, it will give /useradmin as the value.
+
+To use navigationEnd, you’ll need to import it and subscribe the event to call gtag() when something happens. You’ll also need to give your Angular component access to gtag by declaring it as a Function.
+
+For code efficiency purposes, you can place all this in the app.component.ts file as it is the first file that gets called and loads at the top level of everything that eventually follows.
+
+In short, the code should look something like this:
+
+...
+import{Router, NavigationEnd} from '@angular/router';
+...
+declare let gtag: Function;
+...
+export class AppComponent {
+  constructor(public router: Router){   
+      this.router.events.subscribe(event => {
+         if(event instanceof NavigationEnd){
+             gtag('config', 'xx-xxxxx-xx', 
+                   {
+                     'page_path': event.urlAfterRedirects
+                   }
+                  );
+          }
+       }
+    )}
+}
+
+3.	Event tracking (Event based)
+
+Event tracking adds another layer of data to your Analytics statistics. Its implementation, however, is less laid back than page views and will require a little intervention to get the right data to Google’s free platform.
+
+To keep everything cohesive and to reduce the amount of duplicate code across our application, we’re going to create an Angular service and use it in our components.
+To do this, you can use the CLI to generate a service for you and then add it to your app.module.ts file as one of the providers.
+
+To generate a new service using the CLI:
+ng generate s GoogleAnalytics
+
+What your app.module.ts code should look like:
+
+
+...
+	import {GoogleAnalyticsService} from './google-analytics.service';
+	...
+	@NgModule({
+	...
+	   providers: [GoogleAnalyticsService],
+	});
+
+
+Inside your newly created service file, you’re going to create a public eventEmitter function which will essentially run gtag when it’s called and ensure that your formatting is correct and in the way that’s required by gtag.
+You’ll also need to declare gtag as a Function to expose your service to the externally loaded library.
+Your service code should end up looking something like this:
+
+...
+	declare let gtag:Function;
+	...
+	export class GoogleAnalyticsService {
+	...
+	   public eventEmitter( 
+	       eventName: string, 
+	       eventCategory: string, 
+	       eventAction: string, 
+	       eventLabel: string = null,  
+	       eventValue: number = null ){ 
+	            gtag('event', eventName, { 
+	                    eventCategory: eventCategory, 
+	                    eventLabel: eventLabel, 
+	                    eventAction: eventAction, 
+	                    eventValue: eventValue
+	                  })
+	       }
+	}
+	...
+
+
+To use this service, you’ll need to import it into your component and run it when something happens — something like a button click event — and then pass the values you want to track to the eventEmitter to run.
+So, in your HTML, you might have something like this:
+<button (click)="inviteUserEvent()">Invite User</button>
+Then, in your component where you’ll handle the inviteUserEvernt(), you can call eventEmitter. Do note that you’ll need to import the service you created into your component for it to work.
+Your component code should look something like this:
+
+...
+	import{GoogleAnalyticsService} from './google-analytics.service';
+	...
+	export class inviteUserComponent implements OnInit {
+	...  
+	   inviteUserEvent(){ 
+	     this
+	     .googleAnalyticsService
+	     .eventEmitter("invite_user", "invite", "user", "click", 10);
+	   } 
+	...
+	}
+
+Google has a list of predefined event list:   
+https://developers.google.com/analytics/devguides/collection/gtagjs/events
+
+
+
+Note:  as we have discussed the service  the eventEmitter can be triggered in common api service.
