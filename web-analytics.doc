@@ -117,3 +117,34 @@ https://developers.google.com/analytics/devguides/collection/gtagjs/events
 
 
 Note:  as we have discussed the service  the eventEmitter can be triggered in common api service.
+
+Hi, Jack,
+Looks like the track did not work. Please try to use this:
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-194210325-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-194210325-1');
+</script>
+
+The account login is:
+
+User id: iQMWP2021
+Password: goiQMWPY#1
+
+
+Thanks
+Ron
+
+https://accounts.google.com/signin/v2/identifier?service=analytics&passive=1209600&continue=https%3A%2F%2Fanalytics.google.com%2Fanalytics%2Fweb%2F%23&followup=https%3A%2F%2Fanalytics.google.com%2Fanalytics%2Fweb%2F&flowName=GlifWebSignIn&flowEntry=ServiceLogin
+
+for data checking.
+
+
+For prod, the tracking id is UA-206878350-1  under iqmprod.
+
+
