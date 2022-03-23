@@ -35,3 +35,20 @@ urepo.delete(sid, key);
     void delete(String sid, String key);
     boolean hasKey(String sid, String key);
     void deleteAll(String sid);
+
+
+7 commend
+FLUSHDB :  Delete all keys of the CURRENT Redis database
+FLUSHALL:  Delete all.
+
+KEYS pattern :  find a ky
+   keys *A1234567*
+   keys A123456?        ? only represent one char
+   keys h[^e]llo matches hallo, hbllo, ... but not hello
+   keys h[a-b]llo matches hallo and hbllo
+   Use \ to escape special characters if you want to match them verbatim.
+
+MGET keys pattern
+
+
+
