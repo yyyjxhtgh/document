@@ -1,0 +1,270 @@
+login into saflokydlpbra01 via winscp to access all dev servers.    password:  123WXXwx
+
+after login run the commend below to access each web server:
+
+$ pbrun -h nufl2dacsiqw001 su - wthttp
+$ pbrun -h nufl2dacsiqw002 su - wthttp
+$ pbrun -h nufl2dacsiqw003 su - wthttp
+$ pbrun -h nufl2dacsiqw004 su - wthttp
+
+Here are some folders on the web server:
+
+ Functions (Sub-Directories may be passed to each)
+*    binary    cd /opt/wt/AHS/
+*    certs     cd /opt/wt/common/certs/
+*    logs      cd /opt/wt/logs/AHS/
+*    arch      cd /opt/wt/logs/Archive/AHS/
+
+
+For app server:
+
+$ pbrun -h nufl2dacsiqa001.nonprod.nb01.local su - wttas
+$ pbrun -h nufl2dacsiqa002 su - wttas
+$ pbrun -h nufl2dacsiqa003 su - wttas
+ pbrun -h nufl2dacsiqa003.nonprod.nb01.local su - wttas
+$ pbrun -h nufl2dacsiqa004 su - wttas
+
+For test server:
+
+$ pbrun -h nufl2tacsiqa001 su - wttas
+$ pbrun -h nufl2tacsiqa002 su - wttas
+$ pbrun -h nufl2tacsiqa003 su - wttas
+$ pbrun -h nufl2tacsiqa004 su - wttas
+
+for test web server
+
+$ pbrun -h nufl2tacsiqw001 su - wthttp
+$ pbrun -h nufl2tacsiqw002 su - wthttp
+$ pbrun -h nufl2tacsiqw003 su - wthttp
+$ pbrun -h nufl2tacsiqw004 su - wthttp
+
+for load app server
+$ pbrun -h nufl2lacsiqa001 su - wttas
+$ pbrun -h nufl2lacsiqa002 su - wttas
+$ pbrun -h nufl2lacsiqa003 su - wttas
+$ pbrun -h nufl2lacsiqa004 su - wttas
+$ pbrun -h nufl2lacsiqa005 su - wttas
+$ pbrun -h nufl2lacsiqa006 su - wttas
+$ pbrun -h nufl2lacsiqa007 su - wttas
+$ pbrun -h nufl2lacsiqa008 su - wttas
+
+for load web server
+pbrun -h nufl2lacsiqw001 su - wthttp
+pbrun -h nufl2lacsiqw002 su - wthttp
+pbrun -h nufl2lacsiqw003 su - wthttp
+pbrun -h nufl2lacsiqw004 su - wthttp
+pbrun -h nufl2lacsiqw005 su - wthttp
+pbrun -h nufl2lacsiqw006 su - wthttp
+pbrun -h nufl2lacsiqw007 su - wthttp
+pbrun -h nufl2lacsiqw008 su - wthttp
+
+for prod app server
+use pufl2ppbjump001.pb01.local to get access
+
+Folpy:
+$ pbrun -h pufl2pacsiqa005 su - root
+$ pbrun -h pufl2pacsiqa006 su - root
+$ pbrun -h pufl2pacsiqa007 su - root
+$ pbrun -h pufl2pacsiqa008 su - root
+$ pbrun -h pufl2pacsiqa009 su - root
+$ pbrun -h pufl2pacsiqa010 su - root
+$ pbrun -h pufl2pacsiqa011 su - root
+$ pbrun -h pufl2pacsiqa012 su - root
+
+
+//liferay gateway pbrun -h pufl2pacsiqa00 su - root
+
+
+Gr:
+$ pbrun -h pugr2pacsiqa005 su - root
+wttas
+$ pbrun -h pugr2pacsiqa006 su - root
+wttas
+$ su wttas
+
+$ pbrun -h pugr2pacsiqa008 su - root
+$ pbrun -h pugr2pacsiqa009 su - root
+$ pbrun -h pugr2pacsiqa010 su - root
+$ pbrun -h pugr2pacsiqa011 su - root
+$ pbrun -h pugr2pacsiqa012 su - root
+
+
+
+-Dspring.jndi.ignore=true
+
+
+for prob web server
+
+flopy
+
+
+
+su wthttp
+pbrun -h pufl2pacsiqw001.public.pb01.local su - root    (current+
+pbrun -h pufl2pacsiqw002.public.pb01.local su - root
+pbrun -h pufl2pacsiqw003.public.pb01.local su - root
+pbrun -h pufl2pacsiqw004.public.pb01.local su - root
+pbrun -h pufl2pacsiqw005.public.pb01.local su - root
+pbrun -h pufl2pacsiqw006.public.pb01.local su - root
+pbrun -h pufl2pacsiqw007.public.pb01.local su - root
+pbrun -h pufl2pacsiqw008.public.pb01.local su - root
+
+
+pbrun -h pufl2pacsiqw002 su - root
+pbrun -h pufl2pacsiqw003 su - root
+pbrun -h pufl2pacsiqw004 su - root
+pbrun -h pufl2pacsiqw005 su - root
+pbrun -h pufl2pacsiqw006 su - root
+pbrun -h pufl2pacsiqw007 su - root
+pbrun -h pufl2pacsiqw008 su - root
+wthttp
+
+Gr:
+
+pbrun -h pugr2pacsiqw001.public.pb01.local su - root
+su wthttp
+pbrun -h pugr2pacsiqw002.public.pb01.local su - root
+pbrun -h pugr2pacsiqw003.public.pb01.local su - root
+
+pbrun -h pugr2pacsiqw004.public.pb01.local su - root
+pbrun -h pugr2pacsiqw005.public.pb01.local su - root
+pbrun -h pugr2pacsiqw006.public.pb01.local su - root
+pbrun -h pugr2pacsiqw007.public.pb01.local su - root
+pbrun -h pugr2pacsiqw008.public.pb01.local su - root
+
+su wthttp
+ls
+
+
+
+Search server dev
+pbrun -h nufl2dacsiqs001.nonprod.nb01.local su - wttas
+
+
+
+For search test
+
+$ pbrun -h nufl2tacsiqs001 su - wttas   ===>  the su is not right
+
+
+
+/opt/wt/AHS/IQ/conf/custom/httpd-ssl.conf"  :   loadbalance proxy config for connected dev server. web app root set for IQM
+
+
+
+/opt/wt/AHS/IQ/conf/httpd.conf :  define server root: server root, port and all other server config
+
+
+login to app server with the commend below:
+
+$ pbrun -h nufl2dacsiqa001 su - wttas
+
+IQ app is installed at /opt/wt/TAS/IQ/gateway
+
+To copy files to the current directory from remote host:
+
+$ scp u460806@nufl2tpbjump001.nb01.local:/home/u460806/big/partnerPortalKeystore.pkcs12 .
+$ scp u460806@saflokydlpbra01:/home/u460806/big/iq-registration-service-0.0.1-SNAPSHOT.jar .
+scp -r iq-config-server u460806@nufl2tpbjump001:/home/u460806/scripts/.
+
+scp -r iq-config-server u460806@pufl2ppbjump001:/home/u460806/.
+
+scp -r u460806@pufl2ppbjump001:/home/u460806/iq-config-server .
+
+scp -r u460806@saflokydlpbra01:/home/u460806/big/iq-config-server .
+scp -r iq-gateway-service u460806@saflokydlpbra01:/home/u460806/big/.
+
+scp u460806@nugr2tpbjump001.nb01.local:/home/u460806/certs/* .
+scp u460806@nugr2tpbjump001.nb01.local:/home/u460806/certs/* .
+
+scp u460806@pufl2ppbjump001.pb01.local:/home/u460806/appjars/* .
+
+scp -r u460806@pufl2ppbjump001.pb01.local:/home/u460806/Flopy/script/* .
+
+scp -r u460806@pugr2ppbjump001.pb01.local:/home/u460806/Gr/script/* .
+
+scp  u460806@pufl2ppbjump001:/home/u460806/m .
+
+scp -r u460806@pufl2ppbjump001:/tmp/iqm/* .
+
+scp -r u460806@pufl2ppbjump001.pb01.local:/opt/ftps/pb/oldlogs/u460806_big/ssldocs/* .
+
+cd /opt/wt/www/IQMod/ssldocs
+
+exit
+
+
+
+find a file
+$ find . -name "*config*" -print
+
+copy whole folders to current
+cp -R A .
+
+open a file
+$ vi filename
+insert i
+quit insert ecs
+quit file without save  :q!
+quit file with saving   :wq
+save:   :w
+
+run the script  (sh)
+./xxx
+
+run console without sh:   /opt/wt/TAS/java/bin/java -jar iq-gateway-service-1.0.0.jar --spring.cloud.config.uri=http://nuf12dacsiqa001.nonprod.nb01.local:8888 
+
+run console registration /opt/wt/TAS/java/bin/java -DLOG_FILE=/opt/wt/logs/TAS/ -jar iq-registration-service-0.0.1-SNAPSHOT.jar --spring.cloud.config.uri=http://localhost:8888 
+
+log:  /opt/wt/logs/TAS/
+
+
+//////////////////////////////
+redis dev server
+
+redisUrl: redis://10.37.166.170:6379
+Command I use –
+[root@nufl2diqccha001 TAS]# ./redis-server --protected-mode no
+ 
+nufl2diqccha001.nonprod.nb01.local (10.37.166.170)
+nufl2diqccha002.nonprod.nb01.local (10.37.166.171)
+nufl2tiqccha003.nonprod.nb01.local (10.37.166.172)
+nufl2tiqccha004.nonprod.nb01.local (10.37.166.173)
+nufl2liqccha005.nonprod.nb01.local (10.37.166.174)
+nufl2liqccha006.nonprod.nb01.local (10.37.166.175)
+nugr2liqccha007.nonprod.nb01.local (10.39.166.185)
+nugr2liqccha008.nonprod.nb01.local (10.39.166.186)
+ 
+aws:
+
+10.43.10.249:6379
+
+
+# create a runnable script
+ chmod u+r+x filename.sh
+    ./filename.sh
+
+#start a web server for IQMod
+[ wthttp@nufl2dacsiqw001:/opt/wt/AHS/IQMod/bin ]
+$ ./apachectl -k start
+
+find a port and kill it
+fuser -k 4990/tcp
+
+#find ports
+netstat -tulpn | grep LISTEN
+
+#find  a item in a file:
+grep -rnw iq-gateway-service.log -e 'redis/user'
+
+telnet pufl2pacsiqw001.public.pb01.local 1444
+
+~ shfit G ==> to the end of file in vi
+
+cd /opt/wt/TAS/IQ/gateway/iq-modernization-common-service/bin
+cd /opt/wt/TAS/IQ/gateway/iq-modernization-content-service/bin 
+cd /opt/wt/TAS/IQ/gateway/iq-modernization-orgadmin-service/bin 
+cd /opt/wt/TAS/IQ/gateway/iq-modernization-profile-service/bin
+cd /opt/wt/TAS/IQ/gateway/iq-modernization-report-statement-service/bin 
+cd /opt/wt/TAS/IQ/gateway/iq-modernization-useradmin-service/bin 
+cd /opt/wt/TAS/IQ/gateway/iq-modernization-virtual-terminal-service/bin 
