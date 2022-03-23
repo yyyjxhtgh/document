@@ -1,0 +1,57 @@
+Spring cloud gateway rate limiter:
+
+Adding gateway rate limiter will help to prevent too many calls per second to access single gateway.
+We will utilize Redis server and create gateway rate limiter.
+The following configuration will be added:
+
+spring:
+  application:
+    redis:
+      host: 10.37.166.170
+      port: 6379
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      default-filters:
+      - name: RequestRateLimiter
+        args:
+            redis-rate-limiter.replenishRate: 10
+            redis-rate-limiter.burstCapacity: 20
+            denyEmptyKey: false
+
+redis-rate-limiter.replenishRate: API call allowed per second
+redis-rate-limiter.burstCapacity: API call allowed as burst capacity.
+
+Status 429 will be returned as too many calls are made if burst capacity is exceeded.
+
+The filter can be added at route level:
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: modernization-profile-service
+        uri: lb://iq-modernization-profile-service
+        predicates:
+        - Path=/api/iqservices/v1/myprofile/**
+        - Method=GET, POST, PUT, DELETE, OPTIONS        
+        filters:
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 10
+            redis-rate-limiter.burstCapacity: 20
+            redis-rate-limiter.requestedTokens: 1
+            denyEmptyKey: false
+            
+
+
+The following dependency needs to be added:
+<!-- the following is ratelimiter -->
+ 
+ <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+</dependency>
+
+
