@@ -1,0 +1,56 @@
+Servers:
+
+Flopy:  pufl2pacsiqw001 pufl2pacsiqw002 pufl2pacsiqw003 pufl2pacsiqw004 pufl2pacsiqw005 pufl2pacsiqw006 pufl2pacsiqw007 pufl2pacsiqw008 
+Gr: pugr2pacsiqw001 pugr2pacsiqw002 pugr2pacsiqw003 pugr2pacsiqw004 pugr2pacsiqw005 pugr2pacsiqw006 pugr2pacsiqw007 pugr2pacsiqw001
+
+IQM web server is under /opt/wt/AHS/IQMod   (a separate ticked is raised for it).
+
+Please execute the following change:
+
+1.	Open  http.conf is defined at :/opt/wt/AHS/IQMod/conf
+             
+             The server root is  "/opt/wt/AHS/IQMod”
+             The document root is "/opt/wt/www/IQMod/ssldocs”
+1.	uncomment the following line
+LoadModule rewrite_module modules/mod_rewrite.so
+
+2.	comment this:
+#iqm
+#LoadModule proxy_http_module modules/mod_proxy_http.so
+
+3.	Inside 
+<Directory "/opt/wt/www/IQMod/ssldocs">
+
+Add this line at this beginning: 
+
+Options indexes FollowSymLinks
+
+#add the following right before the end of </Directory>
+
+  # iqm change
+   FallbackResource /index.html
+    RewriteEngine on
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_URI} !^/$
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule . [L]
+
+
+2.	Change  /opt/wt/AHS/IQMod/conf/custom/httpd-ssl.conf
+
+We need to comment out proxyPass
+       	<Proxy "balancer://myset">
+    		BalancerMember "https://:" route=jvm1
+    		ProxySet lbmethod=byrequests
+      	</Proxy>
+               ProxyPass "/CustomErrorPages" "!"
+               #ProxyPass "/" "balancer://myset/" stickysession=JSESSIONID|jsessionid
+                ProxyPassReverse "/" "balancer://myset/" stickysession=JSESSIONID|jsessionid
+
+
+3.	Restart the web server
+[ wthttp@nufl2dacsiqw001:/opt/wt/AHS/IQMod/bin ]
+$ ./apachectl -k start
+
